@@ -10,6 +10,13 @@ DECORATOR = 'decorator'
 ACTION    = 'action'
 CONDITION = 'condition'
 
+#node status
+NODE_ENTER 		= 1
+NODE_OPEN 		= 2
+NODE_RUNNING 	= 3
+NODE_CLOSE 		= 4
+NODE_EXIT		= 5
+
 # CORE
 from b3.core.tick import Tick
 from b3.core.basenode import BaseNode

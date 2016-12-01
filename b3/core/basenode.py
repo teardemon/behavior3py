@@ -14,6 +14,7 @@ class BaseNode(object):
         self.description = self.description or ''
         self.parameters = {}
         self.properties = {}
+        self.status=b3.NODE_CLOSE
 
     @property
     def name(self):
@@ -35,15 +36,18 @@ class BaseNode(object):
         return status
 
     def _enter(self, tick):
+        self.status=b3.NODE_ENTER
         tick._enter_node(self)
         self.enter(tick)
 
     def _open(self, tick):
+        self.status=b3.NODE_OPEN
         tick._open_node(self)
         tick.blackboard.set('is_open', True, tick.tree.id, self.id)
         self.open(tick)
 
     def _tick(self, tick):
+        self.status=b3.NODE_RUNNING
         tick._tick_node(self)
         return self.tick(tick)
 
@@ -51,10 +55,12 @@ class BaseNode(object):
         tick._close_node(self)
         tick.blackboard.set('is_open', False, tick.tree.id, self.id)
         self.close(tick)
+        self.status=b3.NODE_CLOSE
 
     def _exit(self, tick):
         tick._exit_node(self)
         self.exit(tick)
+        self.status=b3.NODE_EXIT
 
     def enter(self, tick): pass
     def open(self, tick): pass

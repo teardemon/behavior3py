@@ -127,7 +127,9 @@ class BehaviorTree(object):
 
         # - close nodes
         for i in xrange(len(last_open_nodes)-1, start-1, -1):
-            last_open_nodes[i]._close(tick);
+            node=last_open_nodes[i]
+            if node.status not in (b3.NODE_CLOSE,b3.NODE_EXIT):
+                node._close(tick);
 
         # Populate blackboard
         blackboard.set('open_nodes', curr_open_nodes, self.id)
