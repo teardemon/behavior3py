@@ -1,3 +1,7 @@
+# changelog
+Fix the running bug, add node status to know the node's status.
+Add an example to learn the code
+
 # BEHAVIOR3PY
 
 This is the official python version of the Behavior3 library, originally written in Javascript.
